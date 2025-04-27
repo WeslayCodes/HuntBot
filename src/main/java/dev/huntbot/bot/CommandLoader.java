@@ -30,6 +30,8 @@ class CommandLoader implements Configured {
 
         Guild guild = HuntBotApp.getBot().getJDA().getGuildById(CONFIG.getMainConfig().getGuild());
 
+        HuntBotApp.getBot().getJDA().updateCommands().addCommands().queue();
+
         if (guild != null) {
             guild.updateCommands().addCommands(guildCommands).queue(null, e -> {
                 Log.error(CommandLoader.class, "Failed to deploy to development guild", e);
