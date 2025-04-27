@@ -28,16 +28,19 @@ class CommandLoader implements Configured {
             guildCommands.add(SlashCommandData.fromData(DataObject.fromJson(command.toString())));
         }
 
+        Log.debug("1");
+
         Guild guild = HuntBotApp.getBot().getJDA().getGuildById(CONFIG.getMainConfig().getGuild());
 
-        HuntBotApp.getBot().getJDA().updateCommands().addCommands().queue();
+        Log.debug("2");
 
         if (guild != null) {
-            guild.updateCommands().addCommands().queue();
+            Log.debug("3");
             guild.updateCommands().addCommands(guildCommands).queue(null, e -> {
                 Log.error(CommandLoader.class, "Failed to deploy to development guild", e);
                 System.exit(-1);
             });
+            Log.debug("4");
         } else {
             Log.error(
                 CommandLoader.class, "Unable to find guild. Could not deploy commands!", new IllegalArgumentException()
