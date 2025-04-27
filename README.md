@@ -1,5 +1,5 @@
 <h1 align="center">
-    <a href="https://github.com/WeslayCodes/HuntBot"><img src="https://github.com/WeslayCodes/BoarBot/assets/60010287/ec7b2217-486c-44e5-b6a1-8814bcef9822" alt="HuntBot - Discord Bot"></a>
+    <a href="https://github.com/WeslayCodes/HuntBot"><img src="https://cdn.discordapp.com/icons/996884296860172469/4a639492abda81a21677d7cd5f2540af.webp?size=512" alt="HuntBot - Discord Bot"></a>
     <br><br>
     HuntBot - Discord Bot
     <br>
@@ -29,11 +29,14 @@ Provides the next time that Kuudra Loremaster will appear on the Blazing Fortres
 ### /hunt helmet
 Tells a player the amount of coins they need to get the Kuudra Follower Helmet.
 
-### /hunt lfg
-Sends a message in a LFG channel, pinging users that have assigned themselves a role.
+### /hunt lfg-ping
+Sends a message in a LFG thread, pinging users that have assigned themselves a role.
 
 ### /hunt sailor
 Adds or removes the Weird Sailor emoticon from the end of a user's nickname.
+
+### /hunt progress
+Tells a player their progress on different hunt requirements.
 
 # Features
 
