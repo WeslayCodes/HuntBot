@@ -1,0 +1,8 @@
+.env
+.idea
+*.iml
+*.ipr
+*.iws
+/target
+/logs
+/deployment

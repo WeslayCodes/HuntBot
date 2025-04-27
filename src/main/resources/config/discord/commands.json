@@ -1,0 +1,91 @@
+{
+  "main": {
+    "name": "hunt",
+    "description": "OHD Utility Commands",
+    "subcommands": {
+      "lfg": {
+        "name": "lfg-ping",
+        "description": "Pings a LFG thread with the relevant role",
+        "location": "dev.huntbot.commands.hunt.LfgSubcommand",
+        "options": [
+          {
+            "name": "reason",
+            "type": 4,
+            "description": "Reasoning for the ping",
+            "required": true,
+            "choices": [
+              {
+                "name": "There is a live Plhlegblast in my lobby",
+                "value": 0
+              },
+              {
+                "name": "The Volcano has Cataclysmic Explosivity in my lobby",
+                "value": 1
+              },
+              {
+                "name": "Arch is giving Kuudra Follower Chestplates in my lobby",
+                "value": 2
+              },
+              {
+                "name": "Jake is selling Golden Ball in my lobby",
+                "value": 3
+              }
+            ]
+          },
+          {
+            "name": "ign",
+            "type": 3,
+            "description": "Player that will warp others in",
+            "required": true,
+            "max_length": 16
+          }
+        ]
+      },
+      "boots": {
+        "name": "boots",
+        "description": "Tells you when Kuudra Loremaster will next appear on the Blazing Fortress",
+        "location": "dev.huntbot.commands.hunt.BootsSubcommand"
+      },
+      "helmet": {
+        "name": "helmet",
+        "description": "Tells you the amount to donate to the Kuudra Believer for the Kuudra Follower Helmet",
+        "location": "dev.huntbot.commands.hunt.HelmetSubcommand",
+        "options": [
+          {
+            "name": "ign",
+            "type": 3,
+            "description": "Player to examine",
+            "required": true,
+            "max_length": 16
+          }
+        ]
+      },
+      "sailor": {
+        "name": "sailor",
+        "description": "im goin 2 da circus. (add/remove (\u2310\u25A0_\u25A0)/ to your nickname)",
+        "location": "dev.huntbot.commands.hunt.SailorSubcommand"
+      },
+      "progress": {
+        "name": "progress",
+        "description": "Tells you the progress on certain hunt steps for a profile",
+        "location": "dev.huntbot.commands.hunt.ProgressSubcommand",
+        "options": [
+          {
+            "name": "ign",
+            "type": 3,
+            "description": "Player to examine",
+            "required": true,
+            "max_length": 16
+          },
+          {
+            "name": "profile",
+            "type": 3,
+            "description": "Profile to examine",
+            "required": true,
+            "autocomplete": true
+          }
+        ]
+      }
+    }
+  }
+}
