@@ -41,6 +41,10 @@ class ConfigLoader {
                 config.getMainConfig().setLogChannel(HuntBotApp.getEnv("LOG_CHANNEL"));
             }
 
+            if (HuntBotApp.getEnv("PING_CHANNEL") != null) {
+                config.getMainConfig().setPingChannel(HuntBotApp.getEnv("PING_CHANNEL"));
+            }
+
             if (HuntBotApp.getEnv("THREADS") != null) {
                 config.getMainConfig().setThreads(new Gson().fromJson(HuntBotApp.getEnv("THREADS"), String[].class));
             }

@@ -20,6 +20,8 @@ public class MainConfig {
      */
     private String logChannel = "";
 
+    private String pingChannel = "";
+
     private String[] threads = {};
 
     private String[] roles = {};

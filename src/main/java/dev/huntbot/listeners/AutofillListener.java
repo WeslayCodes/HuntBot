@@ -134,6 +134,6 @@ public class AutofillListener extends ListenerAdapter implements Runnable, Confi
             };
         }
 
-        return new Command.Choice(profileName, fruitName);
+        return new Command.Choice(profileName, fruitName.toLowerCase());
     }
 }

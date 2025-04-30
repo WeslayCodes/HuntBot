@@ -27,6 +27,7 @@ public class StringConfig {
     private String sailorFailed = "";
     private String lfgPing = "";
     private String lfgSuccess = "";
+    private String lfgThreadMsg = "";
     private String uuidEndpoint = "";
     private String profilesEndpoint = "";
     private String autocompleteBadIgn = "";

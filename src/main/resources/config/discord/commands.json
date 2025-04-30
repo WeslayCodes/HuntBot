@@ -31,13 +31,6 @@
                 "value": 3
               }
             ]
-          },
-          {
-            "name": "ign",
-            "type": 3,
-            "description": "Player that will warp others in",
-            "required": true,
-            "max_length": 16
           }
         ]
       },

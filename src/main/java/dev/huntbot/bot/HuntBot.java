@@ -30,7 +30,9 @@ public class HuntBot implements Bot, Configured {
         CommandLoader.registerSubcommands();
 
         this.jda = JDABuilder.createDefault(HuntBotApp.getEnv("TOKEN"))
-            .addEventListeners(new CommandListener(), new ReadyListener(), new AutofillListener())
+            .addEventListeners(
+                new CommandListener(), new ReadyListener(), new AutofillListener(), new MessageListener()
+            )
             .setActivity(Activity.customStatus(STRS.getActivityStatus()))
             .build();
     }

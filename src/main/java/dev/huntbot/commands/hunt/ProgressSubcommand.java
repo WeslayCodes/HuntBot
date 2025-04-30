@@ -24,7 +24,7 @@ public class ProgressSubcommand extends Subcommand {
     @Override
     public void execute() {
         String ign = Objects.requireNonNull(this.event.getOption("ign")).getAsString();
-        String profileName = Objects.requireNonNull(this.event.getOption("profile")).getAsString();
+        String profileName = Objects.requireNonNull(this.event.getOption("profile")).getAsString().toLowerCase();
 
         boolean userInvalid = !AutofillListener.userUuids.containsKey(ign);
 
@@ -89,7 +89,7 @@ public class ProgressSubcommand extends Subcommand {
 
         for (JsonElement profileElement : profileArray) {
             JsonObject profileData = profileElement.getAsJsonObject();
-            String curProfileName = profileData.get("cute_name").getAsString();
+            String curProfileName = profileData.get("cute_name").getAsString().toLowerCase();
 
             if (!curProfileName.equals(profileName)) {
                 continue;
