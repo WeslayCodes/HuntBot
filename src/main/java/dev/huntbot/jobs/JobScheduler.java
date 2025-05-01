@@ -16,6 +16,7 @@ public class JobScheduler {
             scheduler.scheduleJob(LogJob.getJob(), LogJob.getTrigger());
             scheduler.scheduleJob(ImageChangeJob.getJob(), ImageChangeJob.getTrigger());
             scheduler.scheduleJob(ClearProfileCacheJob.getJob(), ClearProfileCacheJob.getTrigger());
+            scheduler.scheduleJob(UploadTrackerJob.getJob(), UploadTrackerJob.getTrigger());
 
             Log.debug(JobScheduler.class, "Jobs successfully scheduled");
         } catch (SchedulerException exception) {

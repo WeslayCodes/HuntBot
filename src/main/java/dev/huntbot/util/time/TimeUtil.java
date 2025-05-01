@@ -30,6 +30,10 @@ public final class TimeUtil {
         return 60 * 60 * 24;
     }
 
+    public static long getOneDayMilli() {
+        return getOneDaySec() * 1000;
+    }
+
     public static long getThirtyMinMilli() {
         return 1000 * 60 * 30;
     }

@@ -44,4 +44,8 @@ public class StringConfig {
     private String progressBlessedExtra = "";
     private String progressSailor = "";
     private String progressNapkin = "";
+    private String youtubeEndpoint = "";
+    private String geminiEndpoint = "";
+    private String geminiRequest = "";
+    private String geminiInputText = "";
 }

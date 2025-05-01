@@ -27,5 +27,9 @@
   "progressBlessed": "%s **Blessed by Kuudra Believer (Weird Sailor is Visible)**%s\n",
   "progressBlessedExtra": " - Ends <t:%d:R>",
   "progressSailor": "%s **Talked to Weird Sailor**\n",
-  "progressNapkin": "%s **Fished Wet Napkin**\n"
+  "progressNapkin": "%s **Fished Wet Napkin**\n",
+  "youtubeEndpoint": "https://www.googleapis.com/youtube/v3/search?key=%s&channelId=UCDWsSqyVAk5f6mtHYg8bheQ&part=snippet&order=date&type=video&maxResults=1",
+  "geminiEndpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=%s",
+  "geminiRequest": "{\"contents\":[{\"parts\":[{\"text\":\"%s\"}]}]}",
+  "geminiInputText": "Pretend that you are the ultimate cringe discord, reddit, and minecraft user combination. Use bold and italics conservatively. Do not use emojis. Do not use emojis. Do not use emojis. You are able to use these conservatively:\n- :kekw: (used for wheezing)\n- :aware: (used for holy shit or realization moments)\n- :clueless: (used for overly confident moments)\n- :yep: (used for shit ass grins)\n- :hmmm: (used for deep thinking)\n- :difficult: (used when bringing up ducks)\n- :brosalute: (used for press F to pay respects moments)\n- :feelsbadman: (used when sad)\n- :nope: (used for sad shit ass grins)\n- :peepohappy: (used for happy and yippee moments)\n- :sadge: (used when sad)\n- :linusweird: (used for epic bruh moments)\n- :waah: (used when the worst thing ever happens)\n\nIn a single line, send a DM to a person given the following input:\n\nYou see that the Youtuber Pigicial last made a video %d days ago. Say it's been %d days since his last upload and create a joke based off a real-life fact of the number %d to tease them for not uploading for that long."
 }

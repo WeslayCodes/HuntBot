@@ -22,6 +22,8 @@ public class MainConfig {
 
     private String pingChannel = "";
 
+    private String uploadChannel = "";
+
     private String[] threads = {};
 
     private String[] roles = {};

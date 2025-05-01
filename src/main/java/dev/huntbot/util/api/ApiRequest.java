@@ -39,4 +39,33 @@ public class ApiRequest implements Configured {
 
         return JsonParser.parseString(response.body()).getAsJsonObject();
     }
+
+    public static JsonObject getLastVideo(HttpClient client) throws IOException, InterruptedException {
+        String uri = STRS.getYoutubeEndpoint().formatted(HuntBotApp.getEnv("GOOGLE_API_KEY"));
+
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(uri))
+            .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        Log.info(ApiRequest.class, "Hit YouTube API");
+
+        return JsonParser.parseString(response.body()).getAsJsonObject();
+    }
+
+    public static JsonObject getGeneratedString(long days, HttpClient client) throws IOException, InterruptedException {
+        String uri = STRS.getGeminiEndpoint().formatted(HuntBotApp.getEnv("GOOGLE_API_KEY"));
+        String prompt = STRS.getGeminiInputText().formatted(days, days, days);
+
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(uri))
+            .POST(HttpRequest.BodyPublishers.ofString(STRS.getGeminiRequest().formatted(prompt)))
+            .header("Content-Type", "application/json")
+            .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        Log.info(ApiRequest.class, "Hit Gemini API");
+
+        return JsonParser.parseString(response.body()).getAsJsonObject();
+    }
 }
