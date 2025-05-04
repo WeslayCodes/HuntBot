@@ -15,19 +15,19 @@
             "required": true,
             "choices": [
               {
-                "name": "There is a live Plhlegblast in my lobby",
+                "name": "I found a Plhlegblast",
                 "value": 0
               },
               {
-                "name": "The Volcano has Cataclysmic Explosivity in my lobby",
+                "name": "The found a Cataclysmic lobby",
                 "value": 1
               },
               {
-                "name": "Arch is giving Kuudra Follower Chestplates in my lobby",
+                "name": "I need help with the Kuudra Follower Chestplate",
                 "value": 2
               },
               {
-                "name": "Jake is selling Golden Ball in my lobby",
+                "name": "I found a lobby where Golden Ball is being sold",
                 "value": 3
               }
             ]
