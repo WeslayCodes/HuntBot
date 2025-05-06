@@ -9,7 +9,7 @@
   "sailorAdded": "### u r goin 2 da circus",
   "sailorRemoved": "### u r not goin 2 da circus",
   "sailorFailed": "### u r da circus",
-  "lfgPing": "## Hey, <@&%s>! Put your IGN in <#%s> and someone will try to party you ASAP.",
+  "lfgPing": "## Hey, <@&%s>! Put your IGN in <#%s> and someone will try to party you ASAP.\nThis ping was sent with </hunt lfg-ping:1005535778635534397>!",
   "lfgSuccess": "### Successfully made a ping for <#%s>!",
   "lfgThreadMsg": "## <@%s> is warping players into their lobby! Put your IGN in this thread and they'll try to party you ASAP.\nTo avoid punishment, please do not ping <@%s>. Thanks!",
   "uuidEndpoint": "https://api.mojang.com/users/profiles/minecraft/%s",
