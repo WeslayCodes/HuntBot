@@ -53,6 +53,10 @@ class ConfigLoader {
                 config.getMainConfig().setHunterChannel(HuntBotApp.getEnv("HUNTER_CHANNEL"));
             }
 
+            if (HuntBotApp.getEnv("HUNT_FORUM_CHANNEL") != null) {
+                config.getMainConfig().setHuntForumChannel(HuntBotApp.getEnv("HUNT_FORUM_CHANNEL"));
+            }
+
             if (HuntBotApp.getEnv("THREADS") != null) {
                 config.getMainConfig().setThreads(new Gson().fromJson(HuntBotApp.getEnv("THREADS"), String[].class));
             }
