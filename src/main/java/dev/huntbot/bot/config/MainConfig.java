@@ -26,6 +26,8 @@ public class MainConfig {
 
     private String hunterChannel = "";
 
+    private String huntForumChannel = "";
+
     private String[] threads = {};
 
     private String[] roles = {};

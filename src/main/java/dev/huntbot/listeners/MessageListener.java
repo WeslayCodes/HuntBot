@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
+import java.util.ArrayList;
 
 public class MessageListener extends ListenerAdapter implements Runnable, Configured {
     private MessageReceivedEvent event = null;
@@ -29,14 +30,17 @@ public class MessageListener extends ListenerAdapter implements Runnable, Config
 
     @Override
     public void run() {
-        boolean fromPingChannel = this.event.getMessage().getChannelId()
+        boolean fromPingChannel = this.event.getChannel().getId()
             .equals(CONFIG.getMainConfig().getPingChannel());
-        boolean fromHunterChannel = this.event.getMessage().getChannelId()
+        boolean fromHunterChannel = this.event.getChannel().getId()
             .equals(CONFIG.getMainConfig().getHunterChannel());
+        boolean fromHuntForumThread = this.event.getChannelType().isThread() &&
+            this.event.getChannel().asThreadChannel().getParentChannel().getId()
+                .equals(CONFIG.getMainConfig().getHuntForumChannel());
         boolean isPing = this.event.getMessage().getContentRaw().startsWith(STRS.getPromptInitString());
         boolean fromBot = this.event.getMessage().getAuthor().isBot();
         boolean shouldDeleteMessage = fromPingChannel && !fromBot;
-        boolean shouldGenerateMessage = fromHunterChannel && !fromBot && isPing;
+        boolean shouldGenerateMessage = (fromHunterChannel || fromHuntForumThread) && !fromBot && isPing;
 
         if (shouldGenerateMessage) {
             try (HttpClient client = HttpClient.newHttpClient()) {
@@ -48,7 +52,7 @@ public class MessageListener extends ListenerAdapter implements Runnable, Config
                     .getAsJsonObject("content").getAsJsonArray("parts").get(0).getAsJsonObject().get("text")
                     .getAsString();
 
-                this.event.getMessage().reply(textResponse)
+                this.event.getMessage().reply(textResponse).setAllowedMentions(new ArrayList<>())
                     .queue(null, e -> Log.warn(this.getClass(), "Failed to reply to message", e));
             } catch (IOException exception) {
                 Log.error(this.getClass(), "Failed to send/receive information", exception);
