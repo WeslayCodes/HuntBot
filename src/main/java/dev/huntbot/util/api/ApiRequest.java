@@ -66,6 +66,10 @@ public class ApiRequest implements Configured {
             .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
+        if (response.statusCode() != 200) {
+            Log.warn(ApiRequest.class, "Non 200 status code returned: " + response);
+        }
+
         Log.info(ApiRequest.class, "Hit Gemini API with status code " + response.statusCode());
 
         return JsonParser.parseString(response.body()).getAsJsonObject();
