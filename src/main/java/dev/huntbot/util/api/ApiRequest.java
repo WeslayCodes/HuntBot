@@ -1,5 +1,6 @@
 package dev.huntbot.util.api;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dev.huntbot.HuntBotApp;
@@ -56,7 +57,7 @@ public class ApiRequest implements Configured {
     public static JsonObject getGeneratedString(String prompt, HttpClient client)
         throws IOException, InterruptedException
     {
-        prompt = STRS.getGeminiRules() + prompt;
+        prompt = new Gson().toJson(STRS.getGeminiRules() + prompt);
         String uri = STRS.getGeminiEndpoint().formatted(HuntBotApp.getEnv("GOOGLE_API_KEY"));
 
         HttpRequest request = HttpRequest.newBuilder()
