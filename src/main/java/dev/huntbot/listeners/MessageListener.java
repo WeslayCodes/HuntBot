@@ -46,7 +46,7 @@ public class MessageListener extends ListenerAdapter implements Runnable, Config
                 JsonObject geminiResponse = ApiRequest.getGeneratedString(prompt, client);
                 String textResponse = geminiResponse.getAsJsonArray("candidates").get(0).getAsJsonObject()
                     .getAsJsonObject("content").getAsJsonArray("parts").get(0).getAsJsonObject().get("text")
-                    .getAsString().substring(0, 2000);
+                    .getAsString();
 
                 this.event.getMessage().reply(textResponse)
                     .queue(null, e -> Log.warn(this.getClass(), "Failed to reply to message", e));
