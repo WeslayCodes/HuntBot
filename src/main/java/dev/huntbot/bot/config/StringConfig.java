@@ -47,5 +47,7 @@ public class StringConfig {
     private String youtubeEndpoint = "";
     private String geminiEndpoint = "";
     private String geminiRequest = "";
-    private String geminiInputText = "";
+    private String geminiRules = "";
+    private String geminiPigMessage = "";
+    private String promptInitString = "";
 }

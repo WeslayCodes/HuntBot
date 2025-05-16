@@ -53,9 +53,11 @@ public class ApiRequest implements Configured {
         return JsonParser.parseString(response.body()).getAsJsonObject();
     }
 
-    public static JsonObject getGeneratedString(long days, HttpClient client) throws IOException, InterruptedException {
+    public static JsonObject getGeneratedString(String prompt, HttpClient client)
+        throws IOException, InterruptedException
+    {
+        prompt = STRS.getGeminiRules() + prompt;
         String uri = STRS.getGeminiEndpoint().formatted(HuntBotApp.getEnv("GOOGLE_API_KEY"));
-        String prompt = STRS.getGeminiInputText().formatted(days, days, days);
 
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(uri))

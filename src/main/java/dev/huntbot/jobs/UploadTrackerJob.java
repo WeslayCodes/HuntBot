@@ -47,8 +47,9 @@ public class UploadTrackerJob implements Job, Configured {
                 .get("publishedAt").getAsString();
             long timestampMillis = Instant.parse(timestamp).toEpochMilli();
             long daysSince = (TimeUtil.getCurMilli() - timestampMillis) / TimeUtil.getOneDayMilli();
+            String prompt = STRS.getGeminiPigMessage().formatted(daysSince, daysSince);
 
-            JsonObject geminiResponse = ApiRequest.getGeneratedString(daysSince, client);
+            JsonObject geminiResponse = ApiRequest.getGeneratedString(prompt, client);
             String textResponse = geminiResponse.getAsJsonArray("candidates").get(0).getAsJsonObject()
                 .getAsJsonObject("content").getAsJsonArray("parts").get(0).getAsJsonObject().get("text").getAsString();
 

@@ -24,6 +24,8 @@ public class MainConfig {
 
     private String uploadChannel = "";
 
+    private String hunterChannel = "";
+
     private String[] threads = {};
 
     private String[] roles = {};
