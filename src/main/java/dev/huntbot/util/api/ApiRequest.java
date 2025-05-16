@@ -21,7 +21,7 @@ public class ApiRequest implements Configured {
             .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        Log.info(ApiRequest.class, "Hit Mojang API for " + ign);
+        Log.info(ApiRequest.class, "Hit Mojang API for " + ign + " with status code " + response.statusCode());
 
         return JsonParser.parseString(response.body()).getAsJsonObject();
     }
@@ -35,7 +35,7 @@ public class ApiRequest implements Configured {
             .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        Log.info(ApiRequest.class, "Hit Hypixel API for " + uuid);
+        Log.info(ApiRequest.class, "Hit Hypixel API for " + uuid + " with status code " + response.statusCode());
 
         return JsonParser.parseString(response.body()).getAsJsonObject();
     }
@@ -48,7 +48,7 @@ public class ApiRequest implements Configured {
             .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        Log.info(ApiRequest.class, "Hit YouTube API");
+        Log.info(ApiRequest.class, "Hit YouTube API with status code " + response.statusCode());
 
         return JsonParser.parseString(response.body()).getAsJsonObject();
     }
@@ -66,7 +66,7 @@ public class ApiRequest implements Configured {
             .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        Log.info(ApiRequest.class, "Hit Gemini API");
+        Log.info(ApiRequest.class, "Hit Gemini API with status code " + response.statusCode());
 
         return JsonParser.parseString(response.body()).getAsJsonObject();
     }
