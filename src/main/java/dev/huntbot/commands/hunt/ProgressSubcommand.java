@@ -31,7 +31,7 @@ public class ProgressSubcommand extends Subcommand {
         if (userInvalid) {
             String userInvalidStr = STRS.getProgressUserInvalid().formatted(ign);
             this.event.getInteraction().reply(userInvalidStr).setEphemeral(true).queue(null,
-                e -> ExceptionHandler.replyHandle(this.event, this.getClass(), e)
+                e -> ExceptionHandler.replyHandle(this.event, ProgressSubcommand.class, e)
             );
             return;
         }
@@ -40,7 +40,7 @@ public class ProgressSubcommand extends Subcommand {
 
         if (profilesUncached) {
             this.event.getInteraction().reply(STRS.getProgressNotCached()).setEphemeral(true).queue(null,
-                e -> ExceptionHandler.replyHandle(this.event, this.getClass(), e)
+                e -> ExceptionHandler.replyHandle(this.event, ProgressSubcommand.class, e)
             );
             return;
         }
@@ -55,7 +55,7 @@ public class ProgressSubcommand extends Subcommand {
             } catch (IllegalArgumentException | IllegalStateException exception) {
                 String invalidProfileStr = STRS.getProgressInvalidProfile().formatted(ign, profileName);
                 this.event.getInteraction().reply(invalidProfileStr).setEphemeral(true).queue(null,
-                    e -> ExceptionHandler.replyHandle(this.event, this.getClass(), e)
+                    e -> ExceptionHandler.replyHandle(this.event, ProgressSubcommand.class, e)
                 );
                 return;
             }
@@ -63,7 +63,7 @@ public class ProgressSubcommand extends Subcommand {
             String progressStr = getProgressString(ign, profileName, progressData);
 
             this.event.getInteraction().reply(progressStr).setEphemeral(true).queue(null,
-                e -> ExceptionHandler.replyHandle(this.event, this.getClass(), e)
+                e -> ExceptionHandler.replyHandle(this.event, ProgressSubcommand.class, e)
             );
 
             Log.debug(this.user, this.getClass(), "Sent progress data: " + progressData);

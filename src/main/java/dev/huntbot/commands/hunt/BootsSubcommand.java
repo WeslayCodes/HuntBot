@@ -21,7 +21,7 @@ public class BootsSubcommand extends Subcommand {
             : STRS.getLoremasterWaiting().formatted(nextBootsSec);
 
         this.event.getInteraction().reply(bootsStr).setEphemeral(true).queue(null,
-            e -> ExceptionHandler.replyHandle(this.event, this.getClass(), e)
+            e -> ExceptionHandler.replyHandle(this.event, BootsSubcommand.class, e)
         );
     }
 }

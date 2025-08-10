@@ -87,7 +87,7 @@ public class ImageChangeJob implements Job, Configured {
         } catch (IOException | URISyntaxException exception) {
             Log.error(ImageChangeJob.class, "Unable to load icon", exception);
         } catch (IllegalStateException exception) {
-            Log.error(ImageChangeJob.class, "Missing ability to change all guild images", exception);
+            Log.warn(ImageChangeJob.class, "Missing ability to change all guild images", exception);
         }
     }
 }

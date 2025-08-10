@@ -22,7 +22,7 @@ public class HelmetSubcommand extends Subcommand {
         String helmetStr = STRS.getHelmetAmount().formatted(ign, donationNum);
 
         this.event.getInteraction().reply(helmetStr).setEphemeral(true).queue(null,
-            e -> ExceptionHandler.replyHandle(this.event, this.getClass(), e)
+            e -> ExceptionHandler.replyHandle(this.event, HelmetSubcommand.class, e)
         );
 
         Log.debug(this.user, this.getClass(), "Helmet value: " + donationNum);

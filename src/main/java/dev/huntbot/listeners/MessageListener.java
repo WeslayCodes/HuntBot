@@ -1,16 +1,10 @@
 package dev.huntbot.listeners;
 
-import com.google.gson.JsonObject;
 import dev.huntbot.api.util.Configured;
-import dev.huntbot.util.api.ApiRequest;
 import dev.huntbot.util.logging.Log;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.net.http.HttpClient;
-import java.util.ArrayList;
 
 public class MessageListener extends ListenerAdapter implements Runnable, Configured {
     private MessageReceivedEvent event = null;
@@ -32,39 +26,13 @@ public class MessageListener extends ListenerAdapter implements Runnable, Config
     public void run() {
         boolean fromPingChannel = this.event.getChannel().getId()
             .equals(CONFIG.getMainConfig().getPingChannel());
-        boolean fromHunterChannel = this.event.getChannel().getId()
-            .equals(CONFIG.getMainConfig().getHunterChannel());
-        boolean fromHuntForumThread = this.event.getChannelType().isThread() &&
-            this.event.getChannel().asThreadChannel().getParentChannel().getId()
-                .equals(CONFIG.getMainConfig().getHuntForumChannel());
-        boolean isPing = this.event.getMessage().getContentRaw().startsWith(STRS.getPromptInitString());
         boolean fromBot = this.event.getMessage().getAuthor().isBot();
         boolean shouldDeleteMessage = fromPingChannel && !fromBot;
-        boolean shouldGenerateMessage = (fromHunterChannel || fromHuntForumThread) && !fromBot && isPing;
-
-        if (shouldGenerateMessage) {
-            try (HttpClient client = HttpClient.newHttpClient()) {
-                this.event.getMessage().getChannel().sendTyping()
-                    .queue(null, e -> Log.warn(this.getClass(), "Failed to send typing", e));
-                String prompt = this.event.getMessage().getContentRaw().substring(STRS.getPromptInitString().length());
-                JsonObject geminiResponse = ApiRequest.getGeneratedString(prompt, client);
-                String textResponse = geminiResponse.getAsJsonArray("candidates").get(0).getAsJsonObject()
-                    .getAsJsonObject("content").getAsJsonArray("parts").get(0).getAsJsonObject().get("text")
-                    .getAsString();
-
-                this.event.getMessage().reply(textResponse).setAllowedMentions(new ArrayList<>())
-                    .queue(null, e -> Log.warn(this.getClass(), "Failed to reply to message", e));
-            } catch (IOException exception) {
-                Log.error(this.getClass(), "Failed to send/receive information", exception);
-            } catch (InterruptedException exception) {
-                Log.error(this.getClass(), "Send/receive was interrupted", exception);
-            }
-
-            return;
-        }
 
         if (shouldDeleteMessage) {
-            this.event.getMessage().delete().queue(null, e -> Log.warn(this.getClass(), "Failed to delete message", e));
+            this.event.getMessage().delete().queue(null, e ->
+                Log.warn(MessageListener.class, "Failed to delete message", e)
+            );
         }
     }
 }

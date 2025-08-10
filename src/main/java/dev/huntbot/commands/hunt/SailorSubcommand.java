@@ -23,22 +23,22 @@ public class SailorSubcommand extends Subcommand {
             try {
                 member.modifyNickname(memberNickname.substring(0, memberNickname.indexOf(STRS.getSailorEmoticon())))
                     .queue(a -> this.event.reply(STRS.getSailorRemoved()).setEphemeral(true).queue(null,
-                        e -> ExceptionHandler.replyHandle(this.event, this.getClass(), e)
+                        e -> ExceptionHandler.replyHandle(this.event, SailorSubcommand.class, e)
                     ));
             } catch (HierarchyException exception) {
                 this.event.reply(STRS.getSailorFailed()).setEphemeral(true).queue(null,
-                    e -> ExceptionHandler.replyHandle(this.event, this.getClass(), e)
+                    e -> ExceptionHandler.replyHandle(this.event, SailorSubcommand.class, e)
                 );
             }
         } else {
             try {
                 member.modifyNickname(memberNickname + STRS.getSailorEmoticon())
                     .queue(a -> this.event.reply(STRS.getSailorAdded()).setEphemeral(true).queue(null,
-                        e -> ExceptionHandler.replyHandle(this.event, this.getClass(), e)
+                        e -> ExceptionHandler.replyHandle(this.event, SailorSubcommand.class, e)
                     ));
             } catch (HierarchyException exception) {
                 this.event.reply(STRS.getSailorFailed()).setEphemeral(true).queue(null,
-                    e -> ExceptionHandler.replyHandle(this.event, this.getClass(), e)
+                    e -> ExceptionHandler.replyHandle(this.event, SailorSubcommand.class, e)
                 );
             }
         }

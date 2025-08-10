@@ -5,6 +5,7 @@ import dev.huntbot.commands.Subcommand;
 import dev.huntbot.util.hunt.LfgReasonEnum;
 import dev.huntbot.util.logging.ExceptionHandler;
 import dev.huntbot.util.logging.Log;
+import dev.huntbot.util.time.TimeUtil;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel;
@@ -45,16 +46,17 @@ public class LfgSubcommand extends Subcommand implements Configured {
 
         String threadId = threadChannel.getId();
         String roleId = CONFIG.getMainConfig().getRoles()[pingTypeRaw];
+        long timestamp = TimeUtil.getCurSec();
         String userId = this.user.getId();
 
-        pingChannel.sendMessage(STRS.getLfgPing().formatted(roleId, threadId)).queue(
+        pingChannel.sendMessage(STRS.getLfgPing().formatted(roleId, threadId, timestamp)).queue(
             a -> threadChannel.sendMessage(STRS.getLfgThreadMsg().formatted(userId, userId)).queue(
                 b -> this.event.reply(STRS.getLfgSuccess().formatted(threadId)).setEphemeral(true).queue(
-                    null, e -> ExceptionHandler.replyHandle(this.event, this.getClass(), e)
+                    null, e -> ExceptionHandler.replyHandle(this.event, LfgSubcommand.class, e)
                 ),
-                e -> ExceptionHandler.replyHandle(this.event, this.getClass(), e)
+                e -> ExceptionHandler.replyHandle(this.event, LfgSubcommand.class, e)
             ),
-            e -> ExceptionHandler.replyHandle(this.event, this.getClass(), e)
+            e -> ExceptionHandler.replyHandle(this.event, LfgSubcommand.class, e)
         );
 
         Log.debug(this.user, this.getClass(), "Successfully pinged %s".formatted(pingType.toString()));

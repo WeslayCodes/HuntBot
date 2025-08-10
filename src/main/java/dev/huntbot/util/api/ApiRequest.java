@@ -1,6 +1,5 @@
 package dev.huntbot.util.api;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dev.huntbot.HuntBotApp;
@@ -37,41 +36,6 @@ public class ApiRequest implements Configured {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         Log.info(ApiRequest.class, "Hit Hypixel API for " + uuid + " with status code " + response.statusCode());
-
-        return JsonParser.parseString(response.body()).getAsJsonObject();
-    }
-
-    public static JsonObject getLastVideo(HttpClient client) throws IOException, InterruptedException {
-        String uri = STRS.getYoutubeEndpoint().formatted(HuntBotApp.getEnv("GOOGLE_API_KEY"));
-
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(uri))
-            .build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        Log.info(ApiRequest.class, "Hit YouTube API with status code " + response.statusCode());
-
-        return JsonParser.parseString(response.body()).getAsJsonObject();
-    }
-
-    public static JsonObject getGeneratedString(String prompt, HttpClient client)
-        throws IOException, InterruptedException
-    {
-        prompt = new Gson().toJson("\"" + STRS.getGeminiRules().formatted(prompt) + "\"");
-        String uri = STRS.getGeminiEndpoint().formatted(HuntBotApp.getEnv("GOOGLE_API_KEY"));
-
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(uri))
-            .POST(HttpRequest.BodyPublishers.ofString(STRS.getGeminiRequest().formatted(prompt)))
-            .header("Content-Type", "application/json")
-            .build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        if (response.statusCode() != 200) {
-            Log.warn(ApiRequest.class, "Non 200 status code returned: " + response.body());
-        }
-
-        Log.info(ApiRequest.class, "Hit Gemini API with status code " + response.statusCode());
 
         return JsonParser.parseString(response.body()).getAsJsonObject();
     }

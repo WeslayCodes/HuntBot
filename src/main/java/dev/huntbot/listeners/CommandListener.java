@@ -42,7 +42,7 @@ public class CommandListener extends ListenerAdapter implements Runnable, Config
 
         if (cooldownSeconds > 0) {
             this.event.getInteraction().reply(STRS.getOnCooldown().formatted(cooldownSeconds)).setEphemeral(true).queue(
-                null, e -> ExceptionHandler.replyHandle(this.event, this.getClass(), e)
+                null, e -> ExceptionHandler.replyHandle(this.event, CommandListener.class, e)
             );
             return;
         }
