@@ -33,7 +33,7 @@
   "manualPingMessages": [
     "<@&%s> <@%s> has found a **CATACLYSMIC** eruption!\nPlease drop your IGN in this thread and coordinate with <@%s> to be warped into the lobby.",
     "<@&%s> <@%s> is sharing their **Plhlegblast**!\nPlease drop your IGN in this thread and coordinate with <@%s> to be warped into the lobby.",
-    "<@&%s> <@%s> has a **Golden Ball** in Jake's shop!\nPlease drop your IGN in thmanualPingResponseis thread and coordinate with <@%s> to be warped into the lobby."
+    "<@&%s> <@%s> has a **Golden Ball** in Jake's shop!\nPlease drop your IGN in this thread and coordinate with <@%s> to be warped into the lobby."
   ],
   "manualPingThreadNames": [
     "%s's Cataclysmic Thread",
