@@ -1,0 +1,16 @@
+package dev.huntbot.bot.config.components;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Getter
+@Setter
+@ToString
+public class ComponentConfig {
+    private Map<String, IndivComponentConfig> confirm = new HashMap<>();
+    private Map<String, IndivComponentConfig> thread = new HashMap<>();
+}

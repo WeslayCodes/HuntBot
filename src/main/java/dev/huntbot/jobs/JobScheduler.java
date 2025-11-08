@@ -4,6 +4,8 @@ import dev.huntbot.util.logging.Log;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
+import java.util.HashSet;
+
 public class JobScheduler {
     public static void scheduleJobs() {
         try {
@@ -16,6 +18,8 @@ public class JobScheduler {
             scheduler.scheduleJob(LogJob.getJob(), LogJob.getTrigger());
             scheduler.scheduleJob(ImageChangeJob.getJob(), ImageChangeJob.getTrigger());
             scheduler.scheduleJob(ClearProfileCacheJob.getJob(), ClearProfileCacheJob.getTrigger());
+            scheduler.scheduleJob(LockThreadsJob.getJob(), LockThreadsJob.getTrigger());
+            scheduler.scheduleJob(AutoPingJob.getJob(), new HashSet<>(AutoPingJob.getTriggers()), true);
 
             Log.debug(JobScheduler.class, "Jobs successfully scheduled");
         } catch (SchedulerException exception) {

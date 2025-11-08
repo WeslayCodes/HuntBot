@@ -5,6 +5,8 @@ import dev.huntbot.util.logging.ExceptionHandler;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import net.dv8tion.jda.api.interactions.callbacks.IReplyCallback;
+import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
+import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 
 public class SpecialReply implements Configured {
     public static void sendErrorMessage(IReplyCallback interaction, Object obj) {
@@ -23,5 +25,9 @@ public class SpecialReply implements Configured {
     public static void sendErrorMessage(Message message, Object obj) {
         message.editMessage(STRS.getError())
             .queue(null, e -> ExceptionHandler.handle(obj.getClass(), e));
+    }
+
+    public static MessageCreateData getErrorMsgData() {
+        return new MessageCreateBuilder().setContent(STRS.getError()).build();
     }
 }

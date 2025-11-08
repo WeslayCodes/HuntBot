@@ -22,13 +22,9 @@ public class MainConfig {
 
     private String pingChannel = "";
 
-    private String uploadChannel = "";
+    private String[] manualPingRoles = {};
 
-    private String hunterChannel = "";
+    private String[] autoPingRoles = {};
 
-    private String huntForumChannel = "";
-
-    private String[] threads = {};
-
-    private String[] roles = {};
+    private String threadSpyChannel = "";
 }

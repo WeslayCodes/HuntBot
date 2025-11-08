@@ -4,7 +4,6 @@ services:
     environment:
       - TOKEN=${TOKEN}
       - API_KEY=${API_KEY}
-      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
     restart: always
     volumes:
       - ./logs:/app/logs

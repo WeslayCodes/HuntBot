@@ -1,6 +1,7 @@
 package dev.huntbot.bot.config;
 
 import dev.huntbot.bot.config.commands.CommandConfig;
+import dev.huntbot.bot.config.components.ComponentConfig;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -37,5 +38,7 @@ public class BotConfig {
     /**
      * Non-intuitive number constants the bot uses
      */
-    private NumberConfig numberConfig = new NumberConfig();
+    private ConstantConfig constantConfig = new ConstantConfig();
+
+    private ComponentConfig componentConfig = new ComponentConfig();
 }

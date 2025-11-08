@@ -5,7 +5,7 @@
     "subcommands": {
       "lfg": {
         "name": "lfg-ping",
-        "description": "Pings a LFG thread with the relevant role",
+        "description": "Ping a LFG role",
         "location": "dev.huntbot.commands.hunt.LfgSubcommand",
         "options": [
           {
@@ -15,20 +15,16 @@
             "required": true,
             "choices": [
               {
-                "name": "I found a Plhlegblast",
+                "name": "Found a Cataclysmic lobby",
                 "value": 0
               },
               {
-                "name": "I found a Cataclysmic lobby",
+                "name": "Found a Plhlegblast",
                 "value": 1
               },
               {
-                "name": "I need help with the Kuudra Follower Chestplate",
+                "name": "Found a Golden Ball lobby",
                 "value": 2
-              },
-              {
-                "name": "I found a lobby where Golden Ball is being sold",
-                "value": 3
               }
             ]
           }

@@ -25,9 +25,6 @@ public class StringConfig {
     private String sailorAdded = "";
     private String sailorRemoved = "";
     private String sailorFailed = "";
-    private String lfgPing = "";
-    private String lfgSuccess = "";
-    private String lfgThreadMsg = "";
     private String uuidEndpoint = "";
     private String profilesEndpoint = "";
     private String autocompleteBadIgn = "";
@@ -44,4 +41,14 @@ public class StringConfig {
     private String progressBlessedExtra = "";
     private String progressSailor = "";
     private String progressNapkin = "";
+    private String[] manualPingConfirmations = {};
+    private String[] manualPingMessages = {};
+    private String[] manualPingThreadNames = {};
+    private String manualPingProceedResponse = "";
+    private String manualPingCancelResponse = "";
+    private String[] autoPingMessages = {};
+    private String[] autoPingThreadNames = {};
+    private String pingUnlockedStr = "";
+    private String pingLockedStr = "";
+    private String pingTimestampRegex = "";
 }

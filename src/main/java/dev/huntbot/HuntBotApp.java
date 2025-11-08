@@ -11,7 +11,7 @@ import lombok.Getter;
 import java.nio.file.Paths;
 
 /**
- * {@link HuntBotApp BoarBotApp.java}
+ * {@link HuntBotApp HuntBotApp.java}
  *
  * Creates the bot instance using CLI args.
  *

@@ -38,6 +38,10 @@ public final class TimeUtil {
         return 1000 * 60 * 30;
     }
 
+    public static long getPriorMinuteSecs(long timestamp) {
+        return ((timestamp / 60) - 1) * 60;
+    }
+
     public static long getNextBootsSec() {
         ZonedDateTime now = ZonedDateTime.now(ZoneOffset.ofHours(-5));
         int daysUntilTuesday = (DayOfWeek.TUESDAY.getValue() - now.getDayOfWeek().getValue() + 7) % 7;

@@ -1,0 +1,22 @@
+{
+  "confirm": {
+    "proceedBtn": {
+      "custom_id": "PROCEED",
+      "label": "Proceed",
+      "style": 3
+    },
+    "cancelBtn": {
+      "custom_id": "CANCEL",
+      "label": "Cancel",
+      "style": 4
+    }
+  },
+  "thread": {
+    "lockBtn": {
+      "custom_id": "LOCK",
+      "label": "Lock",
+      "emoji": "\uD83D\uDD12",
+      "style": 1
+    }
+  }
+}

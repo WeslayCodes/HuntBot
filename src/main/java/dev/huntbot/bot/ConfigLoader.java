@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import dev.huntbot.HuntBotApp;
 import dev.huntbot.bot.config.*;
 import dev.huntbot.bot.config.commands.CommandConfig;
+import dev.huntbot.bot.config.components.ComponentConfig;
 import dev.huntbot.util.logging.Log;
 import dev.huntbot.util.resource.ResourceUtil;
 
@@ -22,10 +23,11 @@ class ConfigLoader {
     public static String strsPath = langPath + "en_us.json";
 
     public static String utilPath = basePath + "util/";
-    public static String numsPath = utilPath + "constants.json";
+    public static String constantsPath = utilPath + "constants.json";
 
     public static String discordPath = basePath + "discord/";
     public static String cmdsPath = discordPath + "commands.json";
+    public static String componentsPath = discordPath + "components.json";
     
     public static void loadConfig() {
         try {
@@ -45,31 +47,29 @@ class ConfigLoader {
                 config.getMainConfig().setPingChannel(HuntBotApp.getEnv("PING_CHANNEL"));
             }
 
-            if (HuntBotApp.getEnv("UPLOAD_CHANNEL") != null) {
-                config.getMainConfig().setUploadChannel(HuntBotApp.getEnv("UPLOAD_CHANNEL"));
+            if (HuntBotApp.getEnv("MANUAL_PING_ROLES") != null) {
+                config.getMainConfig().setManualPingRoles(
+                    new Gson().fromJson(HuntBotApp.getEnv("MANUAL_PING_ROLES"), String[].class)
+                );
             }
 
-            if (HuntBotApp.getEnv("HUNTER_CHANNEL") != null) {
-                config.getMainConfig().setHunterChannel(HuntBotApp.getEnv("HUNTER_CHANNEL"));
+            if (HuntBotApp.getEnv("AUTO_PING_ROLES") != null) {
+                config.getMainConfig().setAutoPingRoles(
+                    new Gson().fromJson(HuntBotApp.getEnv("AUTO_PING_ROLES"), String[].class)
+                );
             }
 
-            if (HuntBotApp.getEnv("HUNT_FORUM_CHANNEL") != null) {
-                config.getMainConfig().setHuntForumChannel(HuntBotApp.getEnv("HUNT_FORUM_CHANNEL"));
-            }
-
-            if (HuntBotApp.getEnv("THREADS") != null) {
-                config.getMainConfig().setThreads(new Gson().fromJson(HuntBotApp.getEnv("THREADS"), String[].class));
-            }
-
-            if (HuntBotApp.getEnv("ROLES") != null) {
-                config.getMainConfig().setRoles(new Gson().fromJson(HuntBotApp.getEnv("ROLES"), String[].class));
+            if (HuntBotApp.getEnv("THREAD_SPY_CHANNEL") != null) {
+                config.getMainConfig().setThreadSpyChannel(HuntBotApp.getEnv("THREAD_SPY_CHANNEL"));
             }
 
             config.setStringConfig(getFromJson(strsPath, StringConfig.class));
 
-            config.setNumberConfig(getFromJson(numsPath, NumberConfig.class));
+            config.setConstantConfig(getFromJson(constantsPath, ConstantConfig.class));
 
             config.setCommandConfig(getFromJson(cmdsPath, new TypeToken<Map<String, CommandConfig>>(){}.getType()));
+
+            config.setComponentConfig(getFromJson(componentsPath, ComponentConfig.class));
 
             Log.debug(ConfigLoader.class, "Successfully loaded config");
         } catch (IOException exception) {

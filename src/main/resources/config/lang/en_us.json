@@ -9,9 +9,6 @@
   "sailorAdded": "### u r goin 2 da circus",
   "sailorRemoved": "### u r not goin 2 da circus",
   "sailorFailed": "### u r da circus",
-  "lfgPing": "## Hey, <@&%s>! Head over to <#%s> to get a party invite (Sent <t:%d:R>).\n-# This ping was sent with </hunt lfg-ping:1005535778635534397>!",
-  "lfgSuccess": "### Successfully made a ping for <#%s>!",
-  "lfgThreadMsg": "## <@%s> is warping players into their lobby!\nPut your IGN in this thread and they'll try to party you ASAP.\nDo not ping <@%s> unless they ask for you to.",
   "uuidEndpoint": "https://api.mojang.com/users/profiles/minecraft/%s",
   "profilesEndpoint": "https://api.hypixel.net/v2/skyblock/profiles?key=%s&uuid=%s",
   "autocompleteBadIgn": "\"%s\" does not exist",
@@ -27,5 +24,31 @@
   "progressBlessed": "%s **Blessed by Kuudra Believer (Weird Sailor is Visible)**%s\n",
   "progressBlessedExtra": " - Ends <t:%d:R>",
   "progressSailor": "%s **Talked to Weird Sailor**\n",
-  "progressNapkin": "%s **Fished Wet Napkin**\n"
+  "progressNapkin": "%s **Fished Wet Napkin**\n",
+  "manualPingConfirmations": [
+    "## Are you sure?\nThis command should only be run if **__your__** Crimson Isle server **__currently__** has an **__active CATACLYSMIC eruption__**!",
+    "## Are you sure?\nThis command should only be run if **__you or a friend__** has a **Plhlegblast** that is **__currently__** fished up!",
+    "## Are you sure?\nThis command should only be run if the Jake on **__your__** Mushroom Desert server is **__currently__** selling a **__Golden Ball__**!"
+  ],
+  "manualPingMessages": [
+    "<@&%s> <@%s> has found a **CATACLYSMIC** eruption!\nPlease drop your IGN in this thread and coordinate with <@%s> to be warped into the lobby.",
+    "<@&%s> <@%s> is sharing their **Plhlegblast**!\nPlease drop your IGN in this thread and coordinate with <@%s> to be warped into the lobby.",
+    "<@&%s> <@%s> has a **Golden Ball** in Jake's shop!\nPlease drop your IGN in thmanualPingResponseis thread and coordinate with <@%s> to be warped into the lobby."
+  ],
+  "manualPingThreadNames": [
+    "%s's Cataclysmic Thread",
+    "%s's Plhlegblast Thread",
+    "%s's Golden Ball Thread"
+  ],
+  "manualPingProceedResponse": "You have successfully pinged <@&%s>!",
+  "manualPingCancelResponse": "Ping cancelled.",
+  "autoPingMessages": [
+    "<@&%s> A new thread for **Kuudra Follower Chestplate** collaboration has been created!\nPlease drop your IGN in this thread to begin collaborating with others!"
+  ],
+  "autoPingThreadNames": [
+    "Automated Kuudra Follower Chestplate Thread"
+  ],
+  "pingUnlockedStr": "\n## :stopwatch: Locks <t:%d:R>",
+  "pingLockedStr": "\n## :lock: Locked <t:%d:R>",
+  "pingTimestampRegex": "<t:(\\d+):"
 }
