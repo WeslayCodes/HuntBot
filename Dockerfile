@@ -1,4 +1,4 @@
-FROM openjdk:21-bullseye AS base
+FROM openjdk:26-ea-21-jdk AS base
 
 ENV _JAVA_OPTIONS="-Xmx4g"
 
