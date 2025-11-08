@@ -1,4 +1,4 @@
-FROM openjdk:26-ea-21-jdk AS base
+FROM openjdk:26-ea-21-bookworm AS base
 
 ENV _JAVA_OPTIONS="-Xmx4g"
 
