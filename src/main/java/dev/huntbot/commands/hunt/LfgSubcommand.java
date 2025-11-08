@@ -10,6 +10,8 @@ import dev.huntbot.util.logging.Log;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
 public class LfgSubcommand extends Subcommand implements Configured {
+    private static final String pingChannelId = CONFIG.getMainConfig().getPingChannel();
+
     public LfgSubcommand(SlashCommandInteractionEvent event) {
         super(event);
     }
@@ -17,6 +19,14 @@ public class LfgSubcommand extends Subcommand implements Configured {
     @Override
     public void execute() {
         this.event.deferReply(true).queue(null, e -> ExceptionHandler.deferHandle(this.interaction, this, e));
+
+        if (!this.event.getChannel().getId().equals(pingChannelId)) {
+            this.event.getHook().editOriginal(STRS.getManualPingWrongChannel().formatted(pingChannelId)).queue(
+                msg -> {},
+                e -> ExceptionHandler.messageHandle(this.event.getHook().retrieveOriginal().complete(), this, e)
+            );
+            return;
+        }
 
         Interactive interactive = InteractiveFactory.constructInteractive(this.event, ConfirmInteractive.class);
         interactive.execute(null);

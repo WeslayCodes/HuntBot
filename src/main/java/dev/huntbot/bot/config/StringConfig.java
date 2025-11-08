@@ -41,6 +41,7 @@ public class StringConfig {
     private String progressBlessedExtra = "";
     private String progressSailor = "";
     private String progressNapkin = "";
+    private String manualPingWrongChannel = "";
     private String[] manualPingConfirmations = {};
     private String[] manualPingMessages = {};
     private String[] manualPingThreadNames = {};

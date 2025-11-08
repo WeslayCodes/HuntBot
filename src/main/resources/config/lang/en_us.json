@@ -25,6 +25,7 @@
   "progressBlessedExtra": " - Ends <t:%d:R>",
   "progressSailor": "%s **Talked to Weird Sailor**\n",
   "progressNapkin": "%s **Fished Wet Napkin**\n",
+  "manualPingWrongChannel": "This command can only be run in <#%s>!",
   "manualPingConfirmations": [
     "## Are you sure?\nThis command should only be run if **__your__** Crimson Isle server **__currently__** has an **__active CATACLYSMIC eruption__**!",
     "## Are you sure?\nThis command should only be run if **__you or a friend__** has a **Plhlegblast** that is **__currently__** fished up!",
