@@ -5,10 +5,10 @@
     1860
   ],
   "autoPingLockMaxDelaySeconds": [
-    1860
+    2760
   ],
   "autoPingCronStrs": [
-    "0 0 */3 ? * *"
+    "0 0 */5 ? * *"
   ],
   "interactiveIdle": 120000,
   "interactiveHardStop": 300000,
