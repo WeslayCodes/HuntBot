@@ -49,7 +49,7 @@
   "autoPingThreadNames": [
     "Automated Kuudra Follower Chestplate Thread"
   ],
-  "pingUnlockedStr": "\n## :stopwatch: Locks <t:%d:R>",
-  "pingLockedStr": "\n## :lock: Locked <t:%d:R>",
+  "pingUnlockedStr": "\n## :stopwatch: Locks <t:%d:R>\n-# Try </hunt lfg-ping:1005535778635534397>!",
+  "pingLockedStr": "\n## :lock: Locked <t:%d:R>\n-# Try </hunt lfg-ping:1005535778635534397>!",
   "pingTimestampRegex": "<t:(\\d+):"
 }
