@@ -76,7 +76,10 @@ public class ThreadInteractive extends UserInteractive {
         }
         
         MessageEditBuilder editedMsg = new MessageEditBuilder()
-            .setContent(messageStr).setComponents(this.getCurComponents());
+            .setContent(messageStr)
+            .setAllowedMentions(EnumSet.of(Message.MentionType.ROLE))
+            .mentionRoles(roleId)
+            .setComponents(this.getCurComponents());
 
         if (this.lock) {
             this.updateInteractive(false, editedMsg.build());

@@ -61,7 +61,9 @@ public class LockThreadsJob implements Job, Configured {
                     String newMessage = message.getContentRaw().replaceFirst("(?s)\n.*", "") +
                         STRS.getPingLockedStr().formatted(timestamp);
 
-                    try (MessageEditData editData = new MessageEditBuilder().setContent(newMessage).build()) {
+                    MessageEditBuilder editBuilder = new MessageEditBuilder().setContent(newMessage).setComponents();
+
+                    try (MessageEditData editData = editBuilder.build()) {
                         message.editMessage(editData).queue(
                             t -> Log.info(this.getClass(), "Edited " + thread.getName()),
                             e -> Log.error(this.getClass(), "Failed to edit " + thread.getName(), e)
