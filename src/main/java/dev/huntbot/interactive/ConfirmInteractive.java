@@ -62,7 +62,6 @@ public class ConfirmInteractive extends UserInteractive {
 
     private void sendResponse() {
         if (this.proceed != null && this.proceed) {
-            this.curCompEvent.deferReply().queue();
             Interactive threadInteractive = InteractiveFactory
                 .constructThreadInteractive(this.curCompEvent, manualPingIndex);
             threadInteractive.execute(null);

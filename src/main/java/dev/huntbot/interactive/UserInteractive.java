@@ -92,7 +92,7 @@ public abstract class UserInteractive extends Interactive {
 
         if (this.msg == null && this.isMsg) {
             IReplyCallback compInter = (IReplyCallback) this.interaction;
-            compInter.getHook().sendMessage(MessageCreateData.fromEditData(editedMsg)).queue(
+            compInter.getMessageChannel().sendMessage(MessageCreateData.fromEditData(editedMsg)).queue(
                 msg -> {
                     this.msg = msg;
                     this.lastEndTime = TimeUtil.getCurMilli() + 300;
