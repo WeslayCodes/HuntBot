@@ -2,6 +2,7 @@ package dev.huntbot.jobs;
 
 import dev.huntbot.HuntBotApp;
 import dev.huntbot.api.util.Configured;
+import dev.huntbot.bot.config.pings.IndivPingConfig;
 import dev.huntbot.util.logging.Log;
 import dev.huntbot.util.time.TimeUtil;
 import lombok.Getter;
@@ -16,16 +17,16 @@ public class AutoPingJob implements Job, Configured {
     @Getter private final static List<Trigger> triggers = new ArrayList<>();
 
     static {
-        for (int i=0; i<CONSTANTS.getAutoPingCronStrs().length; i++) {
-            String schedule = CONSTANTS.getAutoPingCronStrs()[i];
+        CONFIG.getPingConfig().getScheduled().forEach((name, pingConfig) -> {
+            String schedule = pingConfig.getCron();
             triggers.add(TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule(schedule))
-                .withIdentity(String.valueOf(i)).build());
-        }
+                .withIdentity(name).build());
+        });
     }
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        int autoPingIndex = Integer.parseInt(context.getTrigger().getKey().getName());
+        IndivPingConfig pingConfig = CONFIG.getPingConfig().getScheduled().get(context.getTrigger().getKey().getName());
 
         TextChannel pingChannel = HuntBotApp.getBot().getJDA()
             .getChannelById(TextChannel.class, CONFIG.getMainConfig().getPingChannel());
@@ -35,13 +36,11 @@ public class AutoPingJob implements Job, Configured {
             return;
         }
 
-        String roleId = CONFIG.getMainConfig().getAutoPingRoles()[autoPingIndex];
-        long timestamp = TimeUtil.getPriorMinuteSecs(TimeUtil.getCurSec() +
-            CONSTANTS.getAutoPingLockMaxDelaySeconds()[autoPingIndex]);
+        long timestamp = TimeUtil.getPriorMinuteSecs(TimeUtil.getCurSec() + pingConfig.getLockDelaySeconds());
 
-        String threadMsgStr = STRS.getAutoPingMessages()[autoPingIndex].formatted(roleId, timestamp) +
+        String threadMsgStr = pingConfig.getThreadStartMessage().formatted(pingConfig.getRoleId(), timestamp) +
             STRS.getPingUnlockedStr().formatted(timestamp);
-        String threadName = STRS.getAutoPingThreadNames()[autoPingIndex];
+        String threadName = pingConfig.getThreadName();
 
         pingChannel.sendMessage(threadMsgStr).queue(
             msg -> msg.createThreadChannel(threadName).queue(

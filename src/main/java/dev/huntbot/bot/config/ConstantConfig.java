@@ -15,9 +15,6 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ConstantConfig {
-    private int[] manualPingLockMaxDelaySeconds = {};
-    private String[] autoPingCronStrs = {};
-    private int[] autoPingLockMaxDelaySeconds = {};
     private int interactiveIdle = 0;
     private int interactiveHardStop = 0;
     private int threadInteractiveStop;

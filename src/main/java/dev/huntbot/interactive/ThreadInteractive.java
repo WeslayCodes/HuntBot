@@ -1,6 +1,7 @@
 package dev.huntbot.interactive;
 
 import dev.huntbot.bot.config.components.IndivComponentConfig;
+import dev.huntbot.bot.config.pings.IndivPingConfig;
 import dev.huntbot.util.interactive.InteractiveUtil;
 import dev.huntbot.util.interactive.StopType;
 import dev.huntbot.util.logging.Log;
@@ -16,15 +17,17 @@ import net.dv8tion.jda.api.utils.messages.MessageEditBuilder;
 import java.util.*;
 
 public class ThreadInteractive extends UserInteractive {
-    private final int manualPingIndex;
+    private final IndivPingConfig pingConfig;
+    private final boolean isDemandBased;
     private boolean lock = false;
     private Message message;
 
     private final static Map<String, IndivComponentConfig> COMPONENTS = CONFIG.getComponentConfig().getThread();
 
-    public ThreadInteractive(Interaction interaction, int manualPingIndex) {
+    public ThreadInteractive(Interaction interaction, IndivPingConfig pingConfig) {
         super(interaction, true, CONSTANTS.getThreadInteractiveStop(), CONSTANTS.getThreadInteractiveStop());
-        this.manualPingIndex = manualPingIndex;
+        this.pingConfig = pingConfig;
+        this.isDemandBased = this.pingConfig.getRequiredRequests() > 0;
     }
 
     @Override
@@ -51,14 +54,11 @@ public class ThreadInteractive extends UserInteractive {
     }
 
     private void sendResponse() {
-        String roleId = CONFIG.getMainConfig().getManualPingRoles()[manualPingIndex];
         String userId = this.user.getId();
-        long timestamp = TimeUtil.getPriorMinuteSecs(TimeUtil.getCurSec() +
-            CONSTANTS.getManualPingLockMaxDelaySeconds()[manualPingIndex]);
-        String messageStr = STRS.getManualPingMessages()[manualPingIndex].formatted(roleId, userId, userId) +
+        long timestamp = TimeUtil.getPriorMinuteSecs(TimeUtil.getCurSec() + this.pingConfig.getLockDelaySeconds());
+        String messageStr = this.pingConfig.getThreadStartMessage().formatted(this.pingConfig.getRoleId(), userId, userId) +
             STRS.getPingUnlockedStr().formatted(timestamp);
-        String threadName = STRS.getManualPingThreadNames()[manualPingIndex]
-            .formatted(this.user.getEffectiveName());
+        String threadName = this.pingConfig.getThreadName().formatted(this.user.getEffectiveName());
 
         if (this.lock) {
             ThreadChannel thread = this.message.getStartedThread();
@@ -78,14 +78,17 @@ public class ThreadInteractive extends UserInteractive {
         MessageEditBuilder editedMsg = new MessageEditBuilder()
             .setContent(messageStr)
             .setAllowedMentions(EnumSet.of(Message.MentionType.ROLE))
-            .mentionRoles(roleId)
-            .setComponents(this.getCurComponents());
+            .mentionRoles(this.pingConfig.getRoleId());
+
+        if (!this.isDemandBased) {
+            editedMsg.setComponents(this.getCurComponents());
+        }
 
         if (this.lock) {
             this.updateInteractive(false, editedMsg.build());
             this.stop(StopType.FINISHED);
         } else {
-            this.updateInteractiveWithThead(false, editedMsg.build(), threadName);
+            this.updateInteractiveWithThread(false, editedMsg.build(), threadName);
         }
     }
 

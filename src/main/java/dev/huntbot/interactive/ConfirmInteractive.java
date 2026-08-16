@@ -1,9 +1,12 @@
 package dev.huntbot.interactive;
 
 import dev.huntbot.bot.config.components.IndivComponentConfig;
+import dev.huntbot.bot.config.pings.IndivPingConfig;
+import dev.huntbot.util.data.pingrequest.PingRequestUtil;
 import dev.huntbot.util.interactive.InteractiveUtil;
 import dev.huntbot.util.interactive.StopType;
 import dev.huntbot.util.logging.Log;
+import dev.huntbot.util.time.TimeUtil;
 import net.dv8tion.jda.api.components.actionrow.ActionRow;
 import net.dv8tion.jda.api.components.actionrow.ActionRowChildComponent;
 import net.dv8tion.jda.api.entities.Guild;
@@ -14,7 +17,9 @@ import net.dv8tion.jda.api.utils.messages.MessageEditBuilder;
 import java.util.*;
 
 public class ConfirmInteractive extends UserInteractive {
-    private final int manualPingIndex;
+    private final String pingId;
+    private final IndivPingConfig pingConfig;
+    private final boolean isDemandBased;
     private Boolean proceed;
     private GenericComponentInteractionCreateEvent curCompEvent;
 
@@ -23,9 +28,13 @@ public class ConfirmInteractive extends UserInteractive {
     public ConfirmInteractive(SlashCommandInteractionEvent event) {
         super(event);
 
-        this.manualPingIndex = event.getOption("reason") != null
-            ? Objects.requireNonNull(event.getOption("reason")).getAsInt()
-            : 0;
+        this.pingId = Objects.requireNonNull(event.getOption("reason")).getAsString();
+        Map<String, IndivPingConfig> pingConfigs = CONFIG.getPingConfig().getManual().containsKey(this.pingId)
+            ? CONFIG.getPingConfig().getManual()
+            : CONFIG.getPingConfig().getDemandBased();
+
+        this.pingConfig = pingConfigs.get(this.pingId);
+        this.isDemandBased = this.pingConfig.getRequiredRequests() > 0;
 
         Guild guild = event.getGuild();
 
@@ -61,34 +70,73 @@ public class ConfirmInteractive extends UserInteractive {
     }
 
     private void sendResponse() {
-        if (this.proceed != null && this.proceed) {
-            Interactive threadInteractive = InteractiveFactory
-                .constructThreadInteractive(this.curCompEvent, manualPingIndex);
-            threadInteractive.execute(null);
-            Log.debug(this.user, this.getClass(), "Sent ThreadInteractive");
+        if (this.proceed != null && this.proceed && this.isDemandBased) {
+            this.sendDemandBasedResponse();
+            return;
         }
-        
+
+        if (this.proceed != null && this.proceed) {
+            this.sendManualResponse();
+            return;
+        }
+
+        String replyString = this.proceed == null
+            ? this.pingConfig.getConfirmationMessage()
+            : this.pingConfig.getCancelledMessage().formatted(this.pingConfig.getRoleId());
+
+        this.finishResponse(replyString);
+    }
+
+    private void sendDemandBasedResponse() {
+        PingRequestUtil.merge(this.user.getId(), this.pingId)
+            .thenCompose(v -> {
+                long demandStartTimestamp = TimeUtil.getCurMilli() - this.pingConfig.getRequestExpirationSeconds() * 1000L;
+                return PingRequestUtil.demandGet(this.pingId, demandStartTimestamp);
+            })
+            .thenAccept(demandAmount -> {
+                long requestEndTimestamp = TimeUtil.getCurSec() + this.pingConfig.getRequestExpirationSeconds();
+                String reply = this.pingConfig.getSuccessMessage().formatted(
+                    this.pingConfig.getRoleId(), demandAmount, this.pingConfig.getRequiredRequests(), requestEndTimestamp);
+                this.finishResponse(reply);
+
+                if (demandAmount >= this.pingConfig.getRequiredRequests()) {
+                    Interactive threadInteractive = InteractiveFactory
+                        .constructThreadInteractive(this.curCompEvent, this.pingConfig);
+                    threadInteractive.execute(null);
+                    PingRequestUtil.demandClear(this.pingId)
+                        .exceptionally(ex -> {
+                            Log.error(this.user, this.getClass(), "Failed to clear demand for %s".formatted(this.pingId), ex);
+                            return null;
+                        });
+                }
+
+                Log.debug(this.user, this.getClass(), "Sent request for %s".formatted(this.pingId));
+            })
+            .exceptionally(ex -> {
+                Log.error(this.user, this.getClass(), "Failed to process demand based ping for %s".formatted(this.pingId), ex);
+                this.stop(StopType.EXCEPTION);
+                return null;
+            });
+    }
+
+    private void sendManualResponse() {
+        Interactive threadInteractive = InteractiveFactory
+            .constructThreadInteractive(this.curCompEvent, this.pingConfig);
+        threadInteractive.execute(null);
+
+        Log.debug(this.user, this.getClass(), "Sent ThreadInteractive");
+        this.finishResponse(this.pingConfig.getSuccessMessage().formatted(this.pingConfig.getRoleId()));
+    }
+
+    private void finishResponse(String replyString) {
         MessageEditBuilder editedMsg = new MessageEditBuilder()
-            .setContent(this.getReplyString()).setComponents(this.getCurComponents());
+            .setContent(replyString).setComponents(this.getCurComponents());
 
         this.updateInteractive(false, editedMsg.build());
 
         if (this.proceed != null) {
             this.stop(StopType.FINISHED);
         }
-    }
-
-    private String getReplyString() {
-        if (this.proceed == null) {
-            return STRS.getManualPingConfirmations()[manualPingIndex];
-        }
-
-        if (this.proceed) {
-            String roleId = CONFIG.getMainConfig().getManualPingRoles()[manualPingIndex];
-            return STRS.getManualPingProceedResponse().formatted(roleId);
-        }
-
-        return STRS.getManualPingCancelResponse();
     }
 
     @Override

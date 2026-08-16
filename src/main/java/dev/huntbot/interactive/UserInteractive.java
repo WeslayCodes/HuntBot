@@ -85,7 +85,7 @@ public abstract class UserInteractive extends Interactive {
             e -> ExceptionHandler.replyHandle((SlashCommandInteraction) this.interaction, this, e));
     }
 
-    public void updateInteractiveWithThead(boolean stopping, MessageEditData editedMsg, String threadName) {
+    public void updateInteractiveWithThread(boolean stopping, MessageEditData editedMsg, String threadName) {
         if (this.isStopped && !stopping) {
             return;
         }

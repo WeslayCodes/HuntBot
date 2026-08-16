@@ -2,9 +2,47 @@ services:
   app:
     build: .
     environment:
-      - TOKEN=${TOKEN}
-      - API_KEY=${API_KEY}
+      TOKEN: ${TOKEN}
+      API_KEY: ${API_KEY}
+    env_file:
+      - .env
     restart: on-failure
     volumes:
       - ./logs:/app/logs
       - ./trigger:/app/trigger
+    depends_on:
+      db-migrate:
+        condition: service_completed_successfully
+
+  db:
+    image: mariadb:12.3.2
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_PASS}
+      MARIADB_DATABASE: huntbot
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb -u root -p\"${DB_PASS}\" -e 'SELECT 1'"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "3307:3306"
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql
+
+  db-migrate:
+    image: flyway/flyway:13.3
+    command: migrate
+    environment:
+      FLYWAY_URL: jdbc:mariadb://db:3306/huntbot
+      FLYWAY_USER: root
+      FLYWAY_PASSWORD: ${DB_PASS}
+    restart: no
+    volumes:
+      - ./database:/flyway/sql
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:

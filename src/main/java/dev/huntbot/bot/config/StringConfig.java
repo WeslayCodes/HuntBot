@@ -42,13 +42,6 @@ public class StringConfig {
     private String progressSailor = "";
     private String progressNapkin = "";
     private String manualPingWrongChannel = "";
-    private String[] manualPingConfirmations = {};
-    private String[] manualPingMessages = {};
-    private String[] manualPingThreadNames = {};
-    private String manualPingProceedResponse = "";
-    private String manualPingCancelResponse = "";
-    private String[] autoPingMessages = {};
-    private String[] autoPingThreadNames = {};
     private String pingUnlockedStr = "";
     private String pingLockedStr = "";
     private String pingTimestampRegex = "";

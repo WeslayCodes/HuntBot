@@ -7,11 +7,11 @@ import dev.huntbot.bot.config.*;
 import dev.huntbot.commands.Subcommand;
 import dev.huntbot.interactive.Interactive;
 import dev.huntbot.listeners.*;
+import dev.huntbot.util.data.DataUtil;
 import dev.huntbot.util.logging.Log;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -31,6 +31,7 @@ public class HuntBot implements Bot, Configured {
         Log.info(this.getClass(), "Starting up bot...");
 
         ConfigLoader.loadConfig();
+        DataUtil.setupDatabase();
         CommandLoader.registerSubcommands();
 
         this.jda = JDABuilder.createDefault(HuntBotApp.getEnv("TOKEN"))
@@ -40,13 +41,6 @@ public class HuntBot implements Bot, Configured {
                 new AutofillListener(),
                 new MessageListener(),
                 new ComponentListener()
-            )
-            .setEnabledIntents(
-                GatewayIntent.MESSAGE_CONTENT,
-                GatewayIntent.GUILD_VOICE_STATES,
-                GatewayIntent.GUILD_EXPRESSIONS,
-                GatewayIntent.SCHEDULED_EVENTS,
-                GatewayIntent.GUILD_MESSAGES
             )
             .setActivity(Activity.customStatus(STRS.getActivityStatus()))
             .build();

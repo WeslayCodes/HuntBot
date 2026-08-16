@@ -1,5 +1,6 @@
 package dev.huntbot.interactive;
 
+import dev.huntbot.bot.config.pings.IndivPingConfig;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.Interaction;
 
@@ -14,7 +15,7 @@ public class InteractiveFactory {
         throw new IllegalArgumentException("Not a valid interactive class: " + interactiveClass);
     }
 
-    public static synchronized Interactive constructThreadInteractive(Interaction interaction, int manualPingIndex) {
-        return new ThreadInteractive(interaction, manualPingIndex);
+    public static synchronized Interactive constructThreadInteractive(Interaction interaction, IndivPingConfig pingConfig) {
+        return new ThreadInteractive(interaction, pingConfig);
     }
 }

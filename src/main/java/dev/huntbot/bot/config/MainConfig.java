@@ -21,10 +21,4 @@ public class MainConfig {
     private String logChannel = "";
 
     private String pingChannel = "";
-
-    private String[] manualPingRoles = {};
-
-    private String[] autoPingRoles = {};
-
-    private String threadSpyChannel = "";
 }

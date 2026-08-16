@@ -1,0 +1,3 @@
+CREATE TABLE hunt_user (
+    user_id VARCHAR(32) NOT NULL PRIMARY KEY
+);

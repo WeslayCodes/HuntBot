@@ -19,7 +19,6 @@ public class ReadyListener extends ListenerAdapter implements Configured {
 
         TextChannel logChannel = event.getJDA().getTextChannelById(CONFIG.getMainConfig().getLogChannel());
         TextChannel pingChannel = event.getJDA().getTextChannelById(CONFIG.getMainConfig().getPingChannel());
-        TextChannel threadSpyChannel = event.getJDA().getTextChannelById(CONFIG.getMainConfig().getThreadSpyChannel());
 
         if (logChannel == null) {
             Log.warn(this.getClass(), "Invalid log channel ID. Channel logs are disabled!");
@@ -27,10 +26,6 @@ public class ReadyListener extends ListenerAdapter implements Configured {
 
         if (pingChannel == null) {
             Log.warn(this.getClass(), "Invalid ping channel ID. Ping command is disabled!");
-        }
-
-        if (threadSpyChannel == null) {
-            Log.warn(this.getClass(), "Invalid thread spy channel ID. Thread spying is disabled!");
         }
 
         Log.info(this.getClass(), "Bot is online!", true);

@@ -10,21 +10,25 @@
         "options": [
           {
             "name": "reason",
-            "type": 4,
+            "type": 3,
             "description": "Reasoning for the ping",
             "required": true,
             "choices": [
               {
                 "name": "Found a Cataclysmic lobby",
-                "value": 0
+                "value": "cataclysmic"
               },
               {
                 "name": "Found a Plhlegblast",
-                "value": 1
+                "value": "plhlegblast"
               },
               {
                 "name": "Found a Golden Ball lobby",
-                "value": 2
+                "value": "goldenBall"
+              },
+              {
+                "name": "Looking for Kuudra Follower Chestplate",
+                "value": "chestplate"
               }
             ]
           }

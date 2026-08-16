@@ -1,15 +1,4 @@
 {
-  "manualPingLockMaxDelaySeconds": [
-    1860,
-    360,
-    1860
-  ],
-  "autoPingLockMaxDelaySeconds": [
-    2760
-  ],
-  "autoPingCronStrs": [
-    "0 0 */5 ? * *"
-  ],
   "interactiveIdle": 120000,
   "interactiveHardStop": 300000,
   "threadInteractiveStop": 3600000

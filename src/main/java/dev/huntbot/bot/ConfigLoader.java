@@ -6,6 +6,7 @@ import dev.huntbot.HuntBotApp;
 import dev.huntbot.bot.config.*;
 import dev.huntbot.bot.config.commands.CommandConfig;
 import dev.huntbot.bot.config.components.ComponentConfig;
+import dev.huntbot.bot.config.pings.PingConfig;
 import dev.huntbot.util.logging.Log;
 import dev.huntbot.util.resource.ResourceUtil;
 
@@ -24,6 +25,7 @@ class ConfigLoader {
 
     public static String utilPath = basePath + "util/";
     public static String constantsPath = utilPath + "constants.json";
+    public static String pingsPath = utilPath + "pings.json";
 
     public static String discordPath = basePath + "discord/";
     public static String cmdsPath = discordPath + "commands.json";
@@ -47,25 +49,35 @@ class ConfigLoader {
                 config.getMainConfig().setPingChannel(HuntBotApp.getEnv("PING_CHANNEL"));
             }
 
-            if (HuntBotApp.getEnv("MANUAL_PING_ROLES") != null) {
-                config.getMainConfig().setManualPingRoles(
-                    new Gson().fromJson(HuntBotApp.getEnv("MANUAL_PING_ROLES"), String[].class)
-                );
-            }
-
-            if (HuntBotApp.getEnv("AUTO_PING_ROLES") != null) {
-                config.getMainConfig().setAutoPingRoles(
-                    new Gson().fromJson(HuntBotApp.getEnv("AUTO_PING_ROLES"), String[].class)
-                );
-            }
-
-            if (HuntBotApp.getEnv("THREAD_SPY_CHANNEL") != null) {
-                config.getMainConfig().setThreadSpyChannel(HuntBotApp.getEnv("THREAD_SPY_CHANNEL"));
-            }
-
             config.setStringConfig(getFromJson(strsPath, StringConfig.class));
 
             config.setConstantConfig(getFromJson(constantsPath, ConstantConfig.class));
+
+            config.setPingConfig(getFromJson(pingsPath, PingConfig.class));
+
+            if (HuntBotApp.getEnv("CATACLYSMIC_ID") != null) {
+                config.getPingConfig().getManual().get("cataclysmic").setRoleId(
+                    new Gson().fromJson(HuntBotApp.getEnv("CATACLYSMIC_ID"), String.class)
+                );
+            }
+
+            if (HuntBotApp.getEnv("PLHLEGBLAST_ID") != null) {
+                config.getPingConfig().getManual().get("plhlegblast").setRoleId(
+                    new Gson().fromJson(HuntBotApp.getEnv("PLHLEGBLAST_ID"), String.class)
+                );
+            }
+
+            if (HuntBotApp.getEnv("GOLDEN_BALL_ID") != null) {
+                config.getPingConfig().getManual().get("goldenBall").setRoleId(
+                    new Gson().fromJson(HuntBotApp.getEnv("GOLDEN_BALL_ID"), String.class)
+                );
+            }
+
+            if (HuntBotApp.getEnv("CHESTPLATE_ID") != null) {
+                config.getPingConfig().getDemandBased().get("chestplate").setRoleId(
+                    new Gson().fromJson(HuntBotApp.getEnv("CHESTPLATE_ID"), String.class)
+                );
+            }
 
             config.setCommandConfig(getFromJson(cmdsPath, new TypeToken<Map<String, CommandConfig>>(){}.getType()));
 

@@ -1,0 +1,45 @@
+{
+  "manual": {
+    "cataclysmic": {
+      "roleId": "996903731012571186",
+      "lockDelaySeconds": 1860,
+      "confirmationMessage": "## Are you sure?\nThis command should only be run if **__your__** Crimson Isle server **__currently__** has an **__active CATACLYSMIC eruption__**!",
+      "cancelledMessage": "Cancelled ping for <@&%s>.",
+      "successMessage": "Successfully pinged <@&%s>!",
+      "threadStartMessage": "<@&%s> <@%s> has found a **CATACLYSMIC** eruption!\nPlease drop your IGN in this thread and coordinate with <@%s> to be warped into the lobby.",
+      "threadName": "%s's Cataclysmic Thread"
+    },
+    "plhlegblast": {
+      "roleId": "1002677513543229450",
+      "lockDelaySeconds": 360,
+      "confirmationMessage": "## Are you sure?\nThis command should only be run if **__you or a friend__** has a **Plhlegblast** that is **__currently__** fished up!",
+      "cancelledMessage": "Cancelled ping for <@&%s>.",
+      "successMessage": "Successfully pinged <@&%s>!",
+      "threadStartMessage": "<@&%s> <@%s> is sharing their **Plhlegblast**!\nPlease drop your IGN in this thread and coordinate with <@%s> to be warped into the lobby.",
+      "threadName": "%s's Plhlegblast Thread"
+    },
+    "goldenBall": {
+      "roleId": "1365459164830371871",
+      "lockDelaySeconds": 1860,
+      "confirmationMessage": "## Are you sure?\nThis command should only be run if the Jake on **__your__** Mushroom Desert server is **__currently__** selling a **__Golden Ball__**!",
+      "cancelledMessage": "Cancelled ping for <@&%s>.",
+      "successMessage": "Successfully pinged <@&%s>!",
+      "threadStartMessage": "<@&%s> <@%s> has a **Golden Ball** in Jake's shop!\nPlease drop your IGN in this thread and coordinate with <@%s> to be warped into the lobby.",
+      "threadName": "%s's Golden Ball Thread"
+    }
+  },
+  "scheduled": {},
+  "demandBased": {
+    "chestplate": {
+      "roleId": "1019435956673187870",
+      "lockDelaySeconds": 1860,
+      "confirmationMessage": "## Are you sure?\nThis command should only be run if you're looking to collaborate with others for a **Kuudra Follower Chestplate**!\n-# Note: This role will only be pinged once there's enough demand.",
+      "cancelledMessage": "Cancelled request for <@&%s> to be pinged.",
+      "successMessage": "Successfully requested for <@&%s> to be pinged!\n**Required Requests:** %d/%d\n**Request Expiration:** <t:%d:R>",
+      "threadStartMessage": "<@&%s> A new thread for **Kuudra Follower Chestplate** collaboration has been created!\nPlease drop your IGN in this thread to begin collaborating with others!",
+      "threadName": "Kuudra Follower Chestplate Thread",
+      "requiredRequests": 3,
+      "requestExpirationSeconds": 14400
+    }
+  }
+}
