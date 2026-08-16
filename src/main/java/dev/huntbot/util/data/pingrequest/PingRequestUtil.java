@@ -10,7 +10,7 @@ import java.util.concurrent.CompletableFuture;
 public class PingRequestUtil extends DataUtil {
     public static CompletableFuture<Void> merge(String userId, String pingId) {
         Object[] params = {userId, pingId, new Timestamp(TimeUtil.getCurMilli())};
-        return HuntUserUtil.insert(userId).thenAccept(v -> executeUpdate(PingRequestQuery.MERGE, params));
+        return HuntUserUtil.insert(userId).thenCompose(v -> executeUpdate(PingRequestQuery.MERGE, params));
     }
 
     public static CompletableFuture<Integer> demandGet(String pingId, long demandStartTimestamp) {
