@@ -38,7 +38,7 @@
       "successMessage": "Successfully requested for <@&%s> to be pinged!\n**Required Requests:** %d/%d\n**Request Expiration:** <t:%d:R>",
       "threadStartMessage": "<@&%s> A new thread for **Kuudra Follower Chestplate** collaboration has been created!\nPlease drop your IGN in this thread to begin collaborating with others!",
       "threadName": "Kuudra Follower Chestplate Thread",
-      "requiredRequests": 3,
+      "requiredRequests": 4,
       "requestExpirationSeconds": 14400
     }
   }

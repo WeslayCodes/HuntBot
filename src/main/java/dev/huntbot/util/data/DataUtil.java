@@ -21,7 +21,7 @@ public abstract class DataUtil {
         // Database host must be referenced by container name when running in Docker
         String host = new File("/.dockerenv").exists()
             ? "db:3306"
-            : "localhost:3307";
+            : "localhost:3308";
 
         hikariConfig.setJdbcUrl("jdbc:mariadb://%s/huntbot?allowMultiQueries=true".formatted(host));
         hikariConfig.setMaximumPoolSize(10);

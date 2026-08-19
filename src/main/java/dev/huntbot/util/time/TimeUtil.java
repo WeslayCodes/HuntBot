@@ -55,7 +55,6 @@ public final class TimeUtil {
     public static long getLastBootsSec() {
         ZonedDateTime now = ZonedDateTime.now(ZoneOffset.ofHours(-5));
         int daysSinceTuesday = (now.getDayOfWeek().getValue() - DayOfWeek.TUESDAY.getValue() + 7) % 7;
-        if (daysSinceTuesday == 0) daysSinceTuesday = 7;
 
         ZonedDateTime lastTuesday = now.minusDays(daysSinceTuesday).toLocalDate().atStartOfDay(ZoneOffset.ofHours(-5));
 
